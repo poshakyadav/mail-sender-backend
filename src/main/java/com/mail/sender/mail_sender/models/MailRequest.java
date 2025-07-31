@@ -18,7 +18,10 @@ public class MailRequest {
     private List<String> recipients;
     private String subject;
     private String body;
-    private boolean isHtml;
+    private boolean isHtml= true;
     private List<MultipartFile> attachments;
+
+    private Long recipientListId; // This field for store recipient list ID
+    private Long campaignId;
 
 }

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Unsubscribe Confirmation</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 15px;
+      }
+
+      .container {
+        background: #fff;
+        max-width: 700px;
+        width: 100%;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      h2 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+
+      p {
+        color: #555;
+        font-size: 16px;
+        margin-bottom: 10px;
+        line-height: 1.5;
+      }
+
+      /* form {
+            margin-top: 20px;
+        } */
+
+      button {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 12px 18px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;   
+        text-align: center; 
+      }
+
+      button:hover {
+        background-color: #c82333;
+      }
+
+      @media screen and (max-width: 480px) {
+        .container {
+          width: 100%;
+          height: 100%;
+          border-radius: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+          box-shadow: none;
+        }
+
+        h2 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+
+        button {
+          font-size: 14px;
+          padding: 10px 15px;
+        }
+      }
+      .mainHeading {
+        text-align: center;
+      }
+
+      .paraContainer {
+        padding: 2px;
+      }
+      .buttonContainer{
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="headingContainer">
+        <h2 class="mainHeading">Unsubscribe Confirmation</h2>
+      </div>
+      <div class="paraContainer">
+        <p>This action will remove you from this sender’s mailing list.</p>
+        <p>
+          If you choose to unsubscribe, you will no longer receive any future
+          emails from this sender, including important updates, offers, or
+          notifications.
+        </p>
+        <p>
+          If you unsubscribed by mistake or wish to re-subscribe later, you will
+          need to manually opt-in again.
+        </p>
+        <p>Are you sure you want to proceed?</p>
+      </div>
+      <form action="/api/mail/confirm-unsubscribe" method="POST">
+        <input type="hidden" name="email" th:value="${email}" />
+        <input type="hidden" name="userId" th:value="${userId}" />
+        <div class="buttonContainer">
+            <button type="submit">Yes, Unsubscribe Me</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

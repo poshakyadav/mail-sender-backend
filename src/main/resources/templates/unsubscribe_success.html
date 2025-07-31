@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Unsubscribed Successfully</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .main-container {
+            width: 70%;
+            min-height: 250px;
+            max-height: fit-content;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+        .closeButton {
+            padding: 8px 12px;
+            font-size: 17px;
+            border-radius: 5px;
+            margin-top: 20px;
+            background-color: #e2e2e2;
+            border: red 1px solid;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        .closeButton:hover {
+            background-color: rgb(249, 56, 56);
+            color: white;
+        }
+
+        .messageHeading{
+            font-size: 40px;
+        }
+        .messageText{
+            color: green;
+            padding: 6px 8px;
+            background: #e2e2e2cf;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 20px;
+        }
+        .messageTextParent{
+            margin-top: 30px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="main-container">
+<h2 class="messageHeading">Unsubscribed Successfully!</h2>
+<p class="messageTextParent"><span class="messageText" th:text="${message}"></span></p>
+<button class="closeButton" onclick="closeTabOrRedirect()">Close</button>
+</div>
+
+<script>
+    function closeTabOrRedirect() {
+        // Try to close the tab
+        window.close();
+
+        // If the tab doesn't close (due to browser restrictions), redirect to mail provider
+        // If the tab doesn't close, find the correct mail provider
+            setTimeout(function() {
+                const params = new URLSearchParams(window.location.search);
+                const email = params.get("email"); // Get email from URL (example: ?email=user@example.com)
+
+                if (email) {
+                    const domain = email.split("@")[1]; // Extract domain (example: example.com)
+
+                    // Define known mail providers
+                    const mailProviders = {
+                        "gmail.com": "https://mail.google.com/",
+                        "outlook.com": "https://outlook.live.com/mail/",
+                        "hotmail.com": "https://outlook.live.com/mail/",
+                        "yahoo.com": "https://mail.yahoo.com/",
+                        "icloud.com": "https://www.icloud.com/mail/",
+                        "aol.com": "https://mail.aol.com/",
+                        "zoho.com": "https://mail.zoho.com/",
+                        "protonmail.com": "https://mail.proton.me/"
+                    };
+
+                    // Redirect to correct mail provider or default to Gmail
+                    window.location.href = mailProviders[domain] || "";
+                } else {
+                    // If email is not found, default to Gmail
+                    // window.location.href = "https://mail.google.com/";
+                    window.close();
+                }
+            }, 500);
+    }
+</script>
+</body>
+</html>
